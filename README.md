@@ -89,6 +89,64 @@ https://pyimagesearch.com/2020/09/21/opencv-automatic-license-number-plate-recog
 https://www.section.io/engineering-education/license-plate-detection-and-recognition-using-opencv-and-pytesseract/
 
 
+## Procedure for YOLO based Detection 
+### Detection phase
+#### custom object detection with YOLO:
+1) Note: training should be done on GPU due to large number of parameters to be tune.
+2) YOLO originally trained on COCO dataset consists of 80 classes[in case of one class object detection the mAP should be increased]
+	
+    you can train on your custom dataset based on the instruction in their GitHub page
+	1) clone the repository and run train.py on your own dataset, with your data.yaml configuarion file
+	data.yaml is the explanation of train and val directories, number of classes and name of class
+	2) your dataset should be customized to data format of YOLO (image, labels) pair of image and text file with same name.
+	label coordinate should be (xcenter, ycenter, w, h)
+	3) Roboflow can modified your dataset to YOLO format
+	you need to upload pairs of images and labels, and choose the architeture(YOLOv7 pytorch) and then roboflow will do every thing for you
+	inside your workstation in roboflow(which is with limitation for free account), you can also do whatever augmentation you want
+	you can also split data to train/val/test split
+	thereafter, you can download the modified dataset to your local machine or use it on google colab
+	4) the zip file consist of one data.yaml file that should be used during model training
+	
+    it was the dataset part
+3) Train on custom dataset
+
+    1) train.py also need a pretrained yolov7 model to finetune on it. you can download it from their github page
+	now run the command line and weight for model to train
+	[Note: you may encounter an error that all tensors are not on the same device--> there is a modification on loss.py file that you should do, just search it on issue of their github page]
+	2) after finishing model training some checkpoint of the model is saved in run/train/exp/weighs directory.
+	3) chooose the best.pt as your model for inferencing.
+	4) you can download it to your local machine to run the model on cpu
+	5) inference either can be done on cpu or gpu
+	6) for inference you can run command line detect.py based on the saved model and image data you want to do detection[this case bounding boxes coordinates can be saved in a txt file]
+	7) if you get txt file(NMS is already applied, you need to scale)
+	or your can use your saved model in a python file, then you can do further processes
+	(after applying model you should do NMS yourself and scale)
+	8) the bounding box needs to be scaled to the original image sizes , since the results are normalized
+	9) you can change the coordinates from (xc,yx,w,h)-> (xmin, ymin), (xmax,ymax)->draw rectangle on image or crop image for further analysis in OCR stage
+
+Note:
+	  
+    since the output BB, maybe not alligned horizontally, you need to do it manually (detection lines->longest line->its orientation->rotate the image)
+	there are also some ractification network for doing it in OCR papers
+Now the cropped plate number will be fed to OCR
+## Procedure for Optical Character Recognition 
+1) publicly available OCR (they are not good for persian, specially for alligned text)
+2) based on youtube :
+	1) synthesize a dataset for every persian characters and numbers, create a classification model, train the model in this dataset and use the trained model for test
+	2) crop the rectangle bounding box(cropped BB) in different propopotions 
+       
+            [(40, 120), (100, 200), (180, 280), (270, 360), (350, 400), (400, 460), (460, 530), (530, 600)]
+	        12|پلاک : 10ب 234.
+            (8 total character)
+	3) consider every piece as a 28*28 input to the classification network and predict and concate the predictions for all character
+
+2) our own trained OCR
+	1) based on CTC
+	2) based on transformer
+	3) based on attention
+
+
+
 ### Extra Notes
 1) what if i want to code in tensorflow?
         
