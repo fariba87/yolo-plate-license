@@ -84,9 +84,7 @@ As every ML project, we should consider data and model
 
 
 
-https://learnopencv.com/understanding-multiple-object-tracking-using-deepsort/#:~:text=DeepSORT%20can%20be%20defined%20as,offline%20just%20before%20implementing%20tracking.
-https://pyimagesearch.com/2020/09/21/opencv-automatic-license-number-plate-recognition-anpr-with-python/
-https://www.section.io/engineering-education/license-plate-detection-and-recognition-using-opencv-and-pytesseract/
+
 
 
 ## Procedure for YOLO based Detection 
