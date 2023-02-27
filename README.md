@@ -21,12 +21,14 @@ As every ML project, we should consider data and model
 	    Note 2: Yolo annotation for bounding boxes: (xcenter, ycenter, width, height)
 	    Note 3: yolo predict the offset for bounding boxes
 	    Note 4: yolov8 is anchor free
+	    Note 5: it is an Object Detection Problem
 	
       1.2) for recognition:
 	    
         input: a rectangle image consisting of sequence of numbers and alphabel        
 		Note: we can assume the orientation of text line is horizontal,otherwise an alignment is needed as preprocessing
 		label: text(sequence of characters)
+		Note: it is a sequence to sequence modeling problem(but as there is no free dataset for it(to free annotation for characters at plate level), we consider it as a classification problem)
 2) Model:
 
 	2-1) Detection:
@@ -34,9 +36,9 @@ As every ML project, we should consider data and model
        traditional : HOG, contour detection
        deep learning based:
                two stages: RCNN, FastRCNN
-               one stage : YOLO series, SSD, retinanet
+               one stage : YOLO series, SSD, retinanet, Hugging face' YOLOS(based on transformer)
                    1) YOLO v7
-                   2) also we will try the new released YOLOv8( January 2023) as it outperformes the previous models (also still is in developing stage)
+                   2) also we will try the newly released YOLOv8( January 2023) as it outperformes the previous models (also still is in developing stage)
    2-2) Tracking:
 
        traditional: kalman filter , particle filter, 
