@@ -38,7 +38,10 @@ As every ML project, we should consider data and model
                two stages: RCNN, FastRCNN
                one stage : YOLO series, SSD, retinanet, Hugging face' YOLOS(based on transformer)
                    1) YOLO v7
-                   2) also we will try the newly released YOLOv8( January 2023) as it outperformes the previous models (also still is in developing stage)
+                   2) also I will try the newly released YOLOv8( January 2023) as it outperformes the previous models (also still is in developing stage)
+		   Note: my Yolov8 is trained on a different dataset: as in Jupyter Notebook for yolov8  api_key="wx01Phrfycn12jSgeVb8"
+		   Note: my Yolo7 is trained on the same dataset as the youtube clip
+
    2-2) Tracking:
 
        traditional: kalman filter , particle filter, 
